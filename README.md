@@ -1,3 +1,3 @@
 # odd-duck
 
-![Lighthouse]{./lighthouse.png}
+![Lighthouse](./lighthouse.png)
