@@ -100,17 +100,65 @@ img1.addEventListener("click", handleImgClick);
 img2.addEventListener("click", handleImgClick);
 img3.addEventListener("click", handleImgClick);
 
+const voteData = [];
+const viewData = [];
+
+// Function to update the chart with the collected data
+function updateChart() {
+  const ctx = document.getElementById("voteChart").getContext("2d");
+
+  // Create data for chart
+  const data = {
+    labels: products.map((product) => product.name),
+    datasets: [
+      {
+        label: "Votes",
+        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        borderColor: "rgba(75, 192, 192, 1)",
+        borderWidth: 1,
+        data: voteData,
+      },
+      {
+        label: "Views",
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        borderColor: "rgba(255, 99, 132, 1)",
+        borderWidth: 1,
+        data: viewData,
+      },
+    ],
+  };
+
+  // Create chart
+  const myBarChart = new Chart(ctx, {
+    type: "bar",
+    data: data,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}
+
 // button to view results
 function showResults() {
   // put a bunch of lis into ul
   const results = document.getElementById("results");
+  results.innerHTML = "";
 
   // loop thru prods and make an li for each one
   for (let i = 0; i < products.length; i++) {
     const li = document.createElement("li");
     li.textContent = `${products[i].name}: was viewed ${products[i].views} times, and clicked ${products[i].clicks} times.`;
     results.appendChild(li);
+
+    voteData.push(products[i].clicks);
+    viewData.push(products[i].views);
   }
+
+  updateChart();
 }
 
 // make the button show results
