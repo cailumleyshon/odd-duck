@@ -10,7 +10,7 @@ let maxClicks = 25;
 // constructor that makes products objects
 function Product(name) {
   this.name = name;
-  this.src = `./images/${name}.jpg`;
+  this.src = `./Images/${name}.jpg`;
   this.views = 0;
   this.clicks = 0;
 }
